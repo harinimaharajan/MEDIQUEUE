@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MEDIQUEUE</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #07111f;
+            color: #eaf4f6;
+        }
+
+        /* ================= LAUNCH PAGE ================= */
+
+        #launchPage {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(4, 16, 30, 0.68),
+                    rgba(4, 16, 30, 0.82)
+                ),
+                url("/images/background_image.jpg")
+                center/cover no-repeat;
+
+            display: flex;
+            align-items: center;
+            padding: 60px 8%;
+        }
+
+        .launch-content {
+            max-width: 850px;
+        }
+
+        .launch-content h1 {
+            font-size: 78px;
+            letter-spacing: 8px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .launch-content h2 {
+            font-size: 30px;
+            line-height: 1.35;
+            font-weight: 500;
+            color: #dceef2;
+            margin-bottom: 18px;
+        }
+
+        .launch-content p {
+            font-size: 21px;
+            color: #65e5d4;
+            margin-bottom: 16px;
+        }
+
+        .features {
+            font-size: 16px;
+            color: #c3d4dc;
+            margin-bottom: 30px;
+        }
+
+        .launch-button {
+            border: none;
+            background: #20c9b3;
+            color: #06131d;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .launch-button:hover {
+            background: #54e6d5;
+        }
+
+
+        /* ================= DASHBOARD ================= */
+
+        #dashboardPage {
+            display: none;
+            min-height: 100vh;
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 260px;
+            height: 100vh;
+
+            padding: 30px 20px;
+
+            background: #091827;
+            border-right: 1px solid #183247;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #35d7c1;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 12px;
+            color: #8297a7;
+            margin-bottom: 30px;
+        }
+
+        .sidebar button {
+            width: 100%;
+
+            border: none;
+            background: transparent;
+
+            color: #b9cbd4;
+
+            text-align: left;
+
+            padding: 13px 14px;
+            margin-bottom: 5px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            cursor: pointer;
+        }
+
+        .sidebar button:hover {
+            background: #102638;
+            color: #40dec9;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main-content {
+            margin-left: 260px;
+            padding: 45px;
+            min-height: 100vh;
+        }
+
+
+        /* ================= SECTIONS ================= */
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #8fa6b5;
+        }
+
+
+        /* ================= CARDS ================= */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(210px, 1fr));
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .stat-card,
+        .info-card {
+            background: #0b1b2a;
+
+            border: 1px solid #18364a;
+
+            border-radius: 14px;
+
+            padding: 25px;
+        }
+
+        .stat-card h3 {
+            color: #8fa6b5;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 34px;
+            font-weight: 750;
+            color: #42ddc8;
+        }
+
+        .info-card {
+            margin-bottom: 20px;
+        }
+
+        .info-card h2 {
+            color: white;
+            margin-bottom: 14px;
+        }
+
+        .info-card p {
+            color: #9fb2bd;
+            line-height: 1.7;
+            margin-bottom: 7px;
+        }
+
+        .info-card strong {
+            color: #42ddc8;
+        }
+
+
+        /* ================= MODULE GRID ================= */
+
+        .module-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 18px;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        .action-button {
+            border: 1px solid #24cbb6;
+
+            background: rgba(36, 203, 182, 0.08);
+
+            color: #45dfcb;
+
+            padding: 10px 18px;
+
+            border-radius: 7px;
+
+            margin-top: 12px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+        }
+
+        .action-button:hover {
+            background: #24cbb6;
+            color: #06131d;
+        }
+
+
+        /* ================= HISTORY ================= */
+
+        .history-item {
+            padding: 17px 20px;
+
+            border-bottom: 1px solid #173044;
+
+            color: #a9bbc5;
+        }
+
+        .history-item::before {
+            content: "●";
+
+            color: #32d8c3;
+
+            margin-right: 12px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 25px;
+            }
+
+            .launch-content h1 {
+                font-size: 52px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================================================= -->
+<!--                    LAUNCH PAGE                    -->
+<!-- ================================================= -->
+
+<section id="launchPage">
+
+    <div class="launch-content">
+
+        <h1>MEDIQUEUE</h1>
+
+        <h2>
+            Intelligent Hospital Patient Queue &
+            Resource Management System
+        </h2>
+
+        <p>
+            Prioritize Care. Optimize Resources. Save Time.
+        </p>
+
+        <div class="features">
+            Smart Queue • Emergency Priority •
+            Bed Allocation • Doctor Management
+        </div>
+
+        <button
+            class="launch-button"
+            onclick="showDashboard()"
+        >
+            GET STARTED →
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!--                   DASHBOARD PAGE                  -->
+<!-- ================================================= -->
+
+<section id="dashboardPage">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            MEDIQUEUE
+        </div>
+
+        <div class="sidebar-subtitle">
+            Hospital Resource Management
+        </div>
+
+
+        <button onclick="showSection('mission')">
+            Mission Dashboard
+        </button>
+
+        <button onclick="showSection('patients')">
+            Patient Management
+        </button>
+
+        <button onclick="showSection('emergency')">
+            Emergency Priority Queue
+        </button>
+
+        <button onclick="showSection('beds')">
+            Smart Bed Allocation
+        </button>
+
+        <button onclick="showSection('doctors')">
+            Doctor Management
+        </button>
+
+        <button onclick="showSection('analytics')">
+            Queue & Analytics
+        </button>
+
+        <button onclick="showSection('history')">
+            Activity History
+        </button>
+
+        <button onclick="showLaunch()">
+            ← Back to Home
+        </button>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================================================= -->
+        <!--                 MISSION DASHBOARD                -->
+        <!-- ================================================= -->
+
+        <section
+            id="mission"
+            class="content-section active"
+        >
+
+            <div class="page-header">
+
+                <h1>Mission Dashboard</h1>
+
+                <p>
+                    Hospital patient queue and resource overview
+                </p>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <h3>Total Patients</h3>
+
+                    <div class="stat-value">
+                        500
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>Emergency Cases</h3>
+
+                    <div class="stat-value">
+                        141
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>ICU Cases</h3>
+
+                    <div class="stat-value">
+                        120
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>Normal Queue</h3>
+
+                    <div class="stat-value">
+                        115
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>Average Age</h3>
+
+                    <div class="stat-value">
+                        43.3
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>Average Satisfaction</h3>
+
+                    <div class="stat-value">
+                        78.8%
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>Average Stay</h3>
+
+                    <div class="stat-value">
+                        7.4 Days
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!--                 PATIENT MANAGEMENT               -->
+        <!-- ================================================= -->
+
+        <section
+            id="patients"
+            class="content-section"
+        >
+
+            <div class="page-header">
+
+                <h1>Patient Management</h1>
+
+                <p>
+                    Manage and search hospital patient records.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h2>Patient Records</h2>
+
+                <p>
+                    Total patient records:
+                    <strong>500</strong>
+                </p>
+
+                <p>
+                    Patient data is maintained using
+                    Linked List based records.
+                </p>
+
+                <button
+                    class="action-button"
+                    onclick="alert('Patient Management module opened successfully.')"
+                >
+                    VIEW PATIENT RECORDS
+                </button>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h2>Patient Search</h2>
+
+                <p>
+                    Search for a patient using Patient ID.
+                </p>
+
+                <input
+                    id="patientSearchId"
+                    type="text"
+                    placeholder="Enter Patient ID"
+                    style="
+                        padding:12px;
+                        width:60%;
+                        background:#081522;
+                        border:1px solid #29485c;
+                        border-radius:7px;
+                        color:white;
+                    "
+                >
+
+                <button
+                    class="action-button"
+                    onclick="searchPatient()"
+                >
+                    SEARCH PATIENT
+                </button>
+
+                <div
+                    id="searchResult"
+                    style="margin-top:20px;"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!--               EMERGENCY PRIORITY QUEUE           -->
+        <!-- ================================================= -->
+
+        <section
+            id="emergency"
+            class="content-section"
+        >
+
+            <div class="page-header">
+
+                <h1>Emergency Priority Queue</h1>
+
+                <p>
+                    Critical patients are processed based
+                    on priority.
+                </p>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <h3>Emergency Cases</h3>
+
+                    <div class="stat-value">
+                        141
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>ICU Cases</h3>
+
+                    <div class="stat-value">
+                        120
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h2>Priority Processing</h2>
+
+                <p>
+                    Emergency patients receive higher priority
+                    than normal patients.
+                </p>
+
+                <p>
+                    Data Structure Used:
+                    <strong>Priority Queue</strong>
+                </p>
+
+                <button
+                    class="action-button"
+                    onclick="viewEmergencyQueue()"
+                >
+                    VIEW EMERGENCY QUEUE
+                </button>
+
+                <div
+                    id="emergencyResult"
+                    style="margin-top:20px;"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SMART BED ALLOCATION -->
+
+        <section
+            id="beds"
+            class="content-section"
+        >
+
+        <div class="page-header">
+
+             <h1>Smart Bed Allocation</h1>
+
+             <p>
+                  Allocate beds according to patient service.
+             </p>
+
+        </div>
+
+    
+
+
+            <div class="module-grid">
+
+                <div class="info-card">
+
+                    <h2>General Medicine</h2>
+
+                    <p>
+                        Recommended:
+                        General Ward Bed
+                    </p>
+
+                    <button
+                        class="action-button"
+                        onclick="allocateBed('General Medicine')"
+                    >
+                        ALLOCATE
+                    </button>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2>Cardiology</h2>
+
+                    <p>
+                        Recommended:
+                        Cardiac Care Bed
+                    </p>
+
+                    <button
+                        class="action-button"
+                        onclick="allocateBed('Cardiology')"
+                    >
+                        ALLOCATE
+                    </button>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2>ICU</h2>
+
+                    <p>
+                        Recommended:
+                        Critical Care Bed
+                    </p>
+
+                    <button
+                        class="action-button"
+                        onclick="allocateBed('ICU')"
+                    >
+                        ALLOCATE
+                    </button>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2>Surgery</h2>
+
+                    <p>
+                        Recommended:
+                        Surgical Ward Bed
+                    </p>
+
+                    <button
+                        class="action-button"
+                        onclick="allocateBed('Surgery')"
+                    >
+                        ALLOCATE
+                    </button>
+
+                </div>
+
+            </div>
+            <div id="bedResult"></div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!--                    DOCTOR MANAGEMENT              -->
+        <!-- ================================================= -->
+
+        <section
+            id="doctors"
+            class="content-section"
+        >
+
+            <div class="page-header">
+
+                <h1>Doctor Management</h1>
+
+                <p>
+                    Hospital doctors and department assignments.
+                </p>
+
+            </div>
+
+
+            <div class="module-grid">
+
+                <div class="info-card">
+
+                    <h2>👨‍⚕️ Dr. Arun Kumar</h2>
+
+                    <p>
+                        Department:
+                        <strong>Cardiology</strong>
+                    </p>
+
+                    <p>
+                        Status:
+                        Available
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2>👩‍⚕️ Dr. Priya Sharma</h2>
+
+                    <p>
+                        Department:
+                        <strong>General Medicine</strong>
+                    </p>
+
+                    <p>
+                        Status:
+                        Available
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2>👨‍⚕️ Dr. Rahul Raj</h2>
+
+                    <p>
+                        Department:
+                        <strong>Emergency</strong>
+                    </p>
+
+                    <p>
+                        Status:
+                        On Duty
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2>👩‍⚕️ Dr. Meena Devi</h2>
+
+                    <p>
+                        Department:
+                        <strong>ICU</strong>
+                    </p>
+
+                    <p>
+                        Status:
+                        On Duty
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2>👨‍⚕️ Dr. Karthik S</h2>
+
+                    <p>
+                        Department:
+                        <strong>Surgery</strong>
+                    </p>
+
+                    <p>
+                        Status:
+                        Available
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2>👩‍⚕️ Dr. Anitha R</h2>
+
+                    <p>
+                        Department:
+                        <strong>Neurology</strong>
+                    </p>
+
+                    <p>
+                        Status:
+                        Available
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!--                  QUEUE ANALYTICS                 -->
+        <!-- ================================================= -->
+
+        <section
+            id="analytics"
+            class="content-section"
+        >
+
+            <div class="page-header">
+
+                <h1>Queue & Analytics</h1>
+
+                <p>
+                    Patient queue statistics and performance.
+                </p>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <h3>Total Patients</h3>
+
+                    <div class="stat-value">
+                        500
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>Emergency Queue</h3>
+
+                    <div class="stat-value">
+                        141
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>Normal Queue</h3>
+
+                    <div class="stat-value">
+                        115
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>Average Stay</h3>
+
+                    <div class="stat-value">
+                        7.4
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h2>Queue Analysis</h2>
+
+                <p>
+                    Priority Queue is used for emergency
+                    and critical patients.
+                </p>
+
+                <p>
+                    Normal patients are maintained using
+                    a standard Queue.
+                </p>
+
+                <p>
+                    Patient records are maintained using
+                    Linked List.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!--                   ACTIVITY HISTORY               -->
+        <!-- ================================================= -->
+
+        <section
+            id="history"
+            class="content-section"
+        >
+
+            <div class="page-header">
+
+                <h1>Activity History</h1>
+
+                <p>
+                    Recent activities performed in MEDIQUEUE.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="history-item">
+                    Queue analytics viewed
+                </div>
+
+                <div class="history-item">
+                    Emergency priority queue accessed
+                </div>
+
+                <div class="history-item">
+                    Patient records viewed
+                </div>
+
+                <div class="history-item">
+                    Smart bed allocation accessed
+                </div>
+
+                <div class="history-item">
+                    Doctor management viewed
+                </div>
+
+                <div class="history-item">
+                    Mission dashboard viewed
+                </div>
+
+                <div class="history-item">
+                    MEDIQUEUE system started
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!--                    JAVASCRIPT                    -->
+<!-- ================================================= -->
+
+<script>
+
+    /* ================= LAUNCH ================= */
+
+    function showDashboard() {
+
+        document.getElementById("launchPage").style.display = "none";
+
+        document.getElementById("dashboardPage").style.display = "block";
+
+    }
+
+
+    function showLaunch() {
+
+        document.getElementById("dashboardPage").style.display = "none";
+
+        document.getElementById("launchPage").style.display = "flex";
+
+    }
+
+
+    /* ================= MODULE NAVIGATION ================= */
+
+    function showSection(sectionId) {
+
+        const sections =
+            document.querySelectorAll(".content-section");
+
+        sections.forEach(function(section) {
+
+            section.classList.remove("active");
+
+        });
+
+
+        const selectedSection =
+            document.getElementById(sectionId);
+
+        if (selectedSection) {
+
+            selectedSection.classList.add("active");
+
+        }
+
+    }
+
+
+    /* ================= PATIENT SEARCH ================= */
+
+    async function searchPatient() {
+
+    const patientId =
+        document.getElementById("patientSearchId").value.trim();
+
+    const result =
+        document.getElementById("searchResult");
+
+    if (patientId === "") {
+
+        result.innerHTML = `
+            <div class="info-card">
+                <h2>Patient Search</h2>
+                <p>Please enter a Patient ID.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    result.innerHTML = `
+        <div class="info-card">
+            <h2>Searching...</h2>
+            <p>Checking patient records...</p>
+        </div>
+    `;
+
+    try {
+
+        const response = await fetch(
+    "http://localhost:8080/api/search?id=" + encodeURIComponent(patientId)
+    )
+
+        if (!response.ok) {
+            throw new Error("Search failed");
+        }
+
+        const data = await response.json();
+
+        if (data.found === true) {
+
+            result.innerHTML = `
+                <div class="info-card">
+
+                    <h2>Patient Found</h2>
+
+                    <p><strong>Patient ID:</strong> ${data.patient_id}</p>
+
+                    <p><strong>Name:</strong> ${data.name}</p>
+
+                    <p><strong>Age:</strong> ${data.age}</p>
+
+                    <p><strong>Arrival Date:</strong> ${data.arrival_date}</p>
+
+                    <p><strong>Departure Date:</strong> ${data.departure_date}</p>
+
+                    <p><strong>Service:</strong> ${data.service}</p>
+
+                    <p><strong>Satisfaction:</strong> ${data.satisfaction}</p>
+
+                    <p><strong>Stay:</strong> ${data.stay_days} days</p>
+
+                </div>
+            `;
+
+        } else {
+
+            result.innerHTML = `
+                <div class="info-card">
+
+                    <h2>Patient Not Found</h2>
+
+                    <p>
+                        No patient found with ID:
+                        <strong>${patientId}</strong>
+                    </p>
+
+                </div>
+            `;
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        result.innerHTML = `
+            <div class="info-card">
+
+                <h2>Connection Error</h2>
+
+                <p>
+                    C Backend connection failed.
+                    Please make sure server.exe is running.
+                </p>
+
+            </div>
+        `;
+    }
+}
+function viewEmergencyQueue() {
+
+    const result =
+        document.getElementById("emergencyResult");
+
+    result.innerHTML = `
+        <div class="info-card">
+
+            <h2>Emergency Priority Queue</h2>
+
+            <p>
+                Patients are arranged according to
+                emergency priority.
+            </p>
+
+            <div class="history-item">
+                <strong>Priority 5</strong> —
+                Emergency Critical Cases
+            </div>
+
+            <div class="history-item">
+                <strong>Priority 4</strong> —
+                ICU Cases
+            </div>
+
+            <div class="history-item">
+                <strong>Priority 3</strong> —
+                Surgery Cases
+            </div>
+
+            <div class="history-item">
+                <strong>Priority 2</strong> —
+                Cardiology Cases
+            </div>
+
+            <div class="history-item">
+                <strong>Priority 1</strong> —
+                General Cases
+            </div>
+
+            <p style="margin-top:18px;">
+                <strong>Data Structure:</strong>
+                Priority Queue
+            </p>
+
+        </div>
+    `;
+}
+
+
+    /* ================= BED ALLOCATION ================= */
+
+    function allocateBed(service) {
+
+    let bed = "";
+
+    if (service === "General Medicine") {
+        bed = "General Ward Bed";
+    }
+    else if (service === "Cardiology") {
+        bed = "Cardiac Care Bed";
+    }
+    else if (service === "ICU") {
+        bed = "Critical Care Bed";
+    }
+    else if (service === "Surgery") {
+        bed = "Surgical Ward Bed";
+    }
+
+    const result =
+        document.getElementById("bedResult");
+
+    result.innerHTML = `
+        <div class="info-card">
+
+            <h2>Bed Allocation Result</h2>
+
+            <p>
+                <strong>Service:</strong>
+                ${service}
+            </p>
+
+            <p>
+                <strong>Allocated Bed:</strong>
+                ${bed}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                <span style="color:#42ddc8;">
+                    Allocated Successfully
+                </span>
+            </p>
+
+        </div>
+    `;
+}
+
+</script>
+
+
+</body>
+
+</html>
